@@ -1162,8 +1162,25 @@ document.addEventListener('DOMContentLoaded', () => {
             if (themeImg && themeImg.complete && themeImg.naturalWidth > 0) {
                 sCtx.save();
                 const sSize = 90;
+                
+                // Add a dynamic wiggle and scale animation based on photoIndex
+                const wiggleAngles = [-0.08, 0.08, -0.05, 0.05]; // angles in radians
+                const angle = wiggleAngles[photoIndex % wiggleAngles.length];
+                
+                const scaleFactors = [1.0, 1.05, 0.95, 1.02];
+                const scale = scaleFactors[photoIndex % scaleFactors.length];
+                
+                // Calculate original coordinates
                 const sx = w - border - sSize + 15;
                 const sy = border + photoH - sSize + 25;
+                
+                // Translate to center of sticker for pivot rotation
+                const centerX = sx + (sSize / 2);
+                const centerY = sy + (sSize / 2);
+                
+                sCtx.translate(centerX, centerY);
+                sCtx.rotate(angle);
+                sCtx.scale(scale, scale);
                 
                 // Choose sticker based on photo index (so different frames have different stickers!)
                 const colWidth = themeImg.width / 4;
@@ -1175,7 +1192,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 sCtx.drawImage(
                     themeImg, 
                     col * colWidth, row * rowHeight, colWidth, rowHeight, // source
-                    sx, sy, sSize, sSize // destination
+                    -sSize / 2, -sSize / 2, sSize, sSize // destination centered at pivot
                 );
                 sCtx.restore();
             }
@@ -1743,19 +1760,34 @@ document.addEventListener('DOMContentLoaded', () => {
         lucide.createIcons();
         
         // 1. Generate frames as themed data URLs
-        const gifFrames = [];
+        const baseFrames = [];
         for (let i = 0; i < capturedFrames.length; i++) {
-            gifFrames.push(compileGifFrame(i));
+            baseFrames.push(compileGifFrame(i));
         }
         
-        // 2. Use gifshot to create the animated GIF
+        // 2. Create Boomerang loop sequence: 1, 2, 3, 4, 3, 2
+        const gifFrames = [];
+        if (baseFrames.length > 2) {
+            // Forward sequence
+            for (let i = 0; i < baseFrames.length; i++) {
+                gifFrames.push(baseFrames[i]);
+            }
+            // Reverse sequence (excluding first/last to avoid double frames)
+            for (let i = baseFrames.length - 2; i > 0; i--) {
+                gifFrames.push(baseFrames[i]);
+            }
+        } else {
+            gifFrames.push(...baseFrames);
+        }
+        
+        // 3. Use gifshot to create the animated GIF
         gifshot.createGIF({
             images: gifFrames,
             gifWidth: 600,
             gifHeight: 600,
-            interval: 0.5, // 500ms delay per frame
-            numFrames: capturedFrames.length,
-            frameDuration: 5
+            interval: 0.26, // 260ms per frame for a super smooth Boomerang loop
+            numFrames: gifFrames.length,
+            frameDuration: 2.6
         }, function(obj) {
             isCompilingGif = false;
             downloadGifBtn.innerHTML = '<i data-lucide="clapperboard"></i> Download GIF';
