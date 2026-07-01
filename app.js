@@ -496,13 +496,26 @@ document.addEventListener('DOMContentLoaded', () => {
             // Countdown beep loop
             countdownOverlay.classList.remove('hidden');
             for (let count = countdownSeconds; count > 0; count--) {
+                countdownNumber.classList.remove('smile-text');
                 countdownNumber.textContent = count;
+                
+                // Force animation restart on each tick
+                countdownNumber.style.animation = 'none';
+                void countdownNumber.offsetWidth; // trigger reflow
+                countdownNumber.style.animation = 'countdownScale 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards';
+                
                 playTickSound();
                 await delay(1000);
             }
             
-            countdownNumber.textContent = "SMILE! ✨";
-            await delay(400);
+            countdownNumber.classList.add('smile-text');
+            countdownNumber.textContent = "SMILE!";
+            
+            countdownNumber.style.animation = 'none';
+            void countdownNumber.offsetWidth; // trigger reflow
+            countdownNumber.style.animation = 'smilePop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards';
+            
+            await delay(600); // slightly longer pause for smile
             countdownOverlay.classList.add('hidden');
             
             // Flash and Capture sound triggers
@@ -1104,6 +1117,73 @@ document.addEventListener('DOMContentLoaded', () => {
         return stripCanvas.toDataURL('image/jpeg', 0.88);
     }
 
+    function compileGifFrame(photoIndex) {
+        const frameCanvas = document.createElement('canvas');
+        const sCtx = frameCanvas.getContext('2d');
+        
+        const w = 600;
+        const h = 600;
+        frameCanvas.width = w;
+        frameCanvas.height = h;
+        
+        // 1. Draw theme background color and pattern
+        drawFrameBackground(sCtx, w, h);
+        
+        // 2. Draw the photo inside an inner frame
+        const border = 40;
+        const photoW = w - (border * 2);
+        const photoH = h - (border * 2) - 40; // leave some spacing at bottom
+        
+        const px = border;
+        const py = border;
+        const radius = parseInt(cornerRadiusInput.value) || 8;
+        
+        sCtx.save();
+        sCtx.beginPath();
+        sCtx.roundRect(px, py, photoW, photoH, radius);
+        sCtx.clip();
+        
+        const frameImg = capturedFrames[photoIndex];
+        // Draw image keeping correct cropping
+        sCtx.drawImage(frameImg, 0, 0, frameImg.width, frameImg.height, px, py, photoW, photoH);
+        sCtx.restore();
+        
+        // 3. Draw a stamp text at the bottom
+        let stampText = stampTextInput.value.trim().toUpperCase() || 'AURA BOOTH';
+        sCtx.fillStyle = ['black', 'burgundy', 'maroon'].includes(activeFramePreset) ? '#94a3b8' : '#64748b';
+        sCtx.font = `bold 14px var(--font-heading)`;
+        sCtx.textAlign = 'center';
+        sCtx.letterSpacing = '0.15em';
+        sCtx.fillText(stampText, w / 2, h - 35);
+        
+        // 4. Draw theme-specific sticker for this frame
+        if (activeStickerTheme !== 'none') {
+            const themeImg = themeImages[activeStickerTheme];
+            if (themeImg && themeImg.complete && themeImg.naturalWidth > 0) {
+                sCtx.save();
+                const sSize = 90;
+                const sx = w - border - sSize + 15;
+                const sy = border + photoH - sSize + 25;
+                
+                // Choose sticker based on photo index (so different frames have different stickers!)
+                const colWidth = themeImg.width / 4;
+                const rowHeight = themeImg.height / 2;
+                const idx = photoIndex % 8;
+                const col = idx % 4;
+                const row = Math.floor(idx / 4);
+                
+                sCtx.drawImage(
+                    themeImg, 
+                    col * colWidth, row * rowHeight, colWidth, rowHeight, // source
+                    sx, sy, sSize, sSize // destination
+                );
+                sCtx.restore();
+            }
+        }
+        
+        return frameCanvas.toDataURL('image/png');
+    }
+
     function drawAestheticThemeDecorations(sCtx, totalWidth, totalHeight, photoCoords) {
         if (photoCoords.length === 0) return;
         
@@ -1649,42 +1729,49 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Simulated QR Code Generator Modal removed
 
-    // Simulated Animated GIF cycle preview
-    let gifIntervalId = null;
+    // Real Animated GIF compiler using gifshot
+    let isCompilingGif = false;
     downloadGifBtn.addEventListener('click', () => {
         if (capturedFrames.length < 2) {
             alert('GIF compile requires at least 2 camera poses.');
             return;
         }
+        if (isCompilingGif) return;
         
-        // Cycle images to create interactive GIF look inside container
-        if (gifIntervalId) {
-            clearInterval(gifIntervalId);
-            gifIntervalId = null;
-            refreshEditorPreview();
-            downloadGifBtn.innerHTML = '<i data-lucide="clapperboard"></i> Download GIF';
-            lucide.createIcons();
-            return;
-        }
-        
-        let frameIdx = 0;
-        gifIntervalId = setInterval(() => {
-            const frameCanvas = capturedFrames[frameIdx];
-            compiledPreviewImg.src = frameCanvas.toDataURL('image/jpeg', 0.8);
-            frameIdx = (frameIdx + 1) % capturedFrames.length;
-        }, 350);
-        
-        downloadGifBtn.innerHTML = '<i data-lucide="square"></i> Stop Loop & Download';
+        isCompilingGif = true;
+        downloadGifBtn.innerHTML = '<i data-lucide="loader" class="spin-loader"></i> Compiling...';
         lucide.createIcons();
         
-        // Generate simulated file download trigger
-        const link = document.createElement('a');
-        link.download = `aurabooth_animation_${Date.now()}.gif`;
-        // Use current compiled collage image as representative fallback download file
-        link.href = compiledPreviewImg.src;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+        // 1. Generate frames as themed data URLs
+        const gifFrames = [];
+        for (let i = 0; i < capturedFrames.length; i++) {
+            gifFrames.push(compileGifFrame(i));
+        }
+        
+        // 2. Use gifshot to create the animated GIF
+        gifshot.createGIF({
+            images: gifFrames,
+            gifWidth: 600,
+            gifHeight: 600,
+            interval: 0.5, // 500ms delay per frame
+            numFrames: capturedFrames.length,
+            frameDuration: 5
+        }, function(obj) {
+            isCompilingGif = false;
+            downloadGifBtn.innerHTML = '<i data-lucide="clapperboard"></i> Download GIF';
+            lucide.createIcons();
+            
+            if (!obj.error) {
+                const link = document.createElement('a');
+                link.download = `aurabooth_animation_${Date.now()}.gif`;
+                link.href = obj.image; // actual animated gif base64
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            } else {
+                alert('Gagal membuat GIF: ' + obj.error);
+            }
+        });
     });
 
     // --- Saved Gallery Management ---

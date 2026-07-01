@@ -498,18 +498,30 @@ body {
 }
 #countdown-number {
     font-family: var(--font-heading);
-    font-size: 7.5rem;
-    font-weight: 800;
-    background: var(--gradient-primary);
+    font-size: 8rem;
+    font-weight: 900;
+    color: #ffffff;
+    text-shadow: 0 0 30px rgba(37, 99, 235, 0.6);
+    transform: scale(0);
+    opacity: 0;
+}
+#countdown-number.smile-text {
+    font-size: 4.2rem;
+    letter-spacing: 0.1em;
+    background: linear-gradient(135deg, #ffd3e8, #db2777);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 4px 20px var(--accent-glow));
-    animation: countdownScale 1s infinite cubic-bezier(0.34, 1.56, 0.64, 1);
+    text-shadow: none;
+    filter: drop-shadow(0 4px 15px rgba(219, 39, 119, 0.4));
 }
 @keyframes countdownScale {
-    0% { transform: scale(0.35); opacity: 0; }
-    50% { transform: scale(1.1); opacity: 1; }
+    0% { transform: scale(0.2); opacity: 0; }
+    50% { transform: scale(1.15); opacity: 1; }
     100% { transform: scale(1); opacity: 1; }
+}
+@keyframes smilePop {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1.1); opacity: 1; }
 }
 
 /* Active photo indicator badge */
@@ -1728,5 +1740,15 @@ input[type="range"]::-webkit-slider-thumb:hover {
     .welcome-showcase-side {
         display: none; /* Hide visual stack on smaller mobile layouts */
     }
+}
+
+/* Loading spin animation */
+.spin-loader {
+    animation: loaderRotate 1s linear infinite;
+    display: inline-block;
+}
+@keyframes loaderRotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
