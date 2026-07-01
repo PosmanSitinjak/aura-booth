@@ -1160,21 +1160,22 @@ document.addEventListener('DOMContentLoaded', () => {
         if (activeStickerTheme !== 'none') {
             const themeImg = themeImages[activeStickerTheme];
             if (themeImg && themeImg.complete && themeImg.naturalWidth > 0) {
+                const sw = themeImg.width / 2;
+                const sh = themeImg.height / 2;
+                const idx = photoIndex % 4;
+
+                // --- Sticker 1: Main Character (Bottom-Right Corner) ---
                 sCtx.save();
-                const sSize = 90;
+                const sSize = 100;
                 
                 // Add a dynamic wiggle and scale animation based on photoIndex
-                const wiggleAngles = [-0.08, 0.08, -0.05, 0.05]; // angles in radians
+                const wiggleAngles = [-0.06, 0.06, -0.04, 0.04];
                 const angle = wiggleAngles[photoIndex % wiggleAngles.length];
-                
-                const scaleFactors = [1.0, 1.05, 0.95, 1.02];
+                const scaleFactors = [1.0, 1.04, 0.96, 1.02];
                 const scale = scaleFactors[photoIndex % scaleFactors.length];
                 
-                // Calculate original coordinates
                 const sx = w - border - sSize + 15;
                 const sy = border + photoH - sSize + 25;
-                
-                // Translate to center of sticker for pivot rotation
                 const centerX = sx + (sSize / 2);
                 const centerY = sy + (sSize / 2);
                 
@@ -1182,17 +1183,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 sCtx.rotate(angle);
                 sCtx.scale(scale, scale);
                 
-                // Choose sticker based on photo index (so different frames have different stickers!)
-                const colWidth = themeImg.width / 4;
-                const rowHeight = themeImg.height / 2;
-                const idx = photoIndex % 8;
-                const col = idx % 4;
-                const row = Math.floor(idx / 4);
+                const col1 = idx % 2;
+                const row1 = Math.floor(idx / 2);
                 
                 sCtx.drawImage(
                     themeImg, 
-                    col * colWidth, row * rowHeight, colWidth, rowHeight, // source
-                    -sSize / 2, -sSize / 2, sSize, sSize // destination centered at pivot
+                    col1 * sw, row1 * sh, sw, sh,
+                    -sSize / 2, -sSize / 2, sSize, sSize
+                );
+                sCtx.restore();
+
+                // --- Sticker 2: Companion/Accent Sticker (Top-Left Corner) ---
+                sCtx.save();
+                const sSize2 = 65;
+                const angle2 = -angle; // opposite wiggle rotation
+                const scale2 = scaleFactors[(photoIndex + 1) % scaleFactors.length];
+                
+                const sx2 = border - 15;
+                const sy2 = border - 15;
+                const centerX2 = sx2 + (sSize2 / 2);
+                const centerY2 = sy2 + (sSize2 / 2);
+                
+                sCtx.translate(centerX2, centerY2);
+                sCtx.rotate(angle2);
+                sCtx.scale(scale2, scale2);
+                
+                const col2 = (idx + 1) % 2;
+                const row2 = Math.floor(((idx + 1) % 4) / 2);
+                
+                sCtx.drawImage(
+                    themeImg,
+                    col2 * sw, row2 * sh, sw, sh,
+                    -sSize2 / 2, -sSize2 / 2, sSize2, sSize2
                 );
                 sCtx.restore();
             }
