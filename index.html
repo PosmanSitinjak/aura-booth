@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Aesthetic retro & classic photobooth online. Choose your layout, capture moments with modern filters, and decorate with cute stickers.">
+    <title>AURA Booth - Web Photobooth Aesthetic & Premium</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons (CDN) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <link rel="stylesheet" href="style.css?v=12">
+</head>
+<body>
+    <div class="glow-bg"></div>
+    
+    <!-- App Header -->
+    <header class="app-header">
+        <div class="logo" id="logo-home">
+            <span class="logo-accent">AURA</span><span>BOOTH</span>
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="main-container">
+        
+        <!-- STEP 1: CHOOSE LAYOUT -->
+        <section id="step-1" class="step-view active">
+            <div class="step-header">
+                <h1 class="step-title">Choose your layout</h1>
+                <p class="step-subtitle">Select a layout for your photo session. You can choose from different styles and poses.</p>
+            </div>
+            
+            <div class="layout-selection-grid">
+                <!-- Layout A Card -->
+                <div class="layout-card active" data-layout="collage">
+                    <div class="layout-card-preview">
+                        <div class="mini-strip-preview layout-a">
+                            <span></span><span></span><span></span><span></span>
+                        </div>
+                    </div>
+                    <div class="layout-card-info">
+                        <h3>Layout A</h3>
+                        <p>4 Pose - Vertical Strip</p>
+                    </div>
+                </div>
+                
+                <!-- Layout B Card -->
+                <div class="layout-card" data-layout="layout3v">
+                    <div class="layout-card-preview">
+                        <div class="mini-strip-preview layout-b">
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>
+                    <div class="layout-card-info">
+                        <h3>Layout B</h3>
+                        <p>3 Pose - Vertical Strip</p>
+                    </div>
+                </div>
+                
+                <!-- Layout C Card -->
+                <div class="layout-card" data-layout="layout2v">
+                    <div class="layout-card-preview">
+                        <div class="mini-strip-preview layout-c">
+                            <span></span><span></span>
+                        </div>
+                    </div>
+                    <div class="layout-card-info">
+                        <h3>Layout C</h3>
+                        <p>2 Pose - Vertical Strip</p>
+                    </div>
+                </div>
+
+                <!-- Layout D Card -->
+                <div class="layout-card" data-layout="layout6cut">
+                    <div class="layout-card-preview">
+                        <div class="mini-strip-preview layout-d">
+                            <span></span><span></span><span></span>
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>
+                    <div class="layout-card-info">
+                        <h3>Layout D</h3>
+                        <p>6 Pose - 2x3 Grid</p>
+                    </div>
+                </div>
+
+                <!-- Traditional Photobooth Layout Card -->
+                <div class="layout-card" data-layout="filmstrip">
+                    <div class="layout-card-preview">
+                        <div class="mini-strip-preview layout-traditional">
+                            <span></span><span></span><span></span><span></span>
+                        </div>
+                    </div>
+                    <div class="layout-card-info">
+                        <h3>Traditional</h3>
+                        <p>4 Pose - Film Strip</p>
+                    </div>
+                </div>
+
+                <!-- Polaroid Layout Card -->
+                <div class="layout-card" data-layout="polaroid">
+                    <div class="layout-card-preview">
+                        <div class="mini-strip-preview layout-polaroid">
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="layout-card-info">
+                        <h3>Polaroid</h3>
+                        <p>1 Pose - Square Frame</p>
+                    </div>
+                </div>
+
+                <!-- Square 2x2 Layout Card -->
+                <div class="layout-card" data-layout="grid2x2">
+                    <div class="layout-card-preview">
+                        <div class="mini-strip-preview layout-grid2x2">
+                            <span></span><span></span>
+                            <span></span><span></span>
+                        </div>
+                    </div>
+                    <div class="layout-card-info">
+                        <h3>Square 2x2</h3>
+                        <p>4 Pose - 2x2 Grid</p>
+                    </div>
+                </div>
+
+                <!-- 9-Cut Layout Card -->
+                <div class="layout-card" data-layout="layout9cut">
+                    <div class="layout-card-preview">
+                        <div class="mini-strip-preview layout-grid3x3">
+                            <span></span><span></span><span></span>
+                            <span></span><span></span><span></span>
+                            <span></span><span></span><span></span>
+                        </div>
+                    </div>
+                    <div class="layout-card-info">
+                        <h3>9-Cut Grid</h3>
+                        <p>9 Pose - 3x3 Grid</p>
+                    </div>
+                </div>
+
+                <!-- Double Wide Layout Card -->
+                <div class="layout-card" data-layout="layout2h">
+                    <div class="layout-card-preview">
+                        <div class="mini-strip-preview layout-doublewide">
+                            <span></span><span></span>
+                        </div>
+                    </div>
+                    <div class="layout-card-info">
+                        <h3>Double Wide</h3>
+                        <p>2 Pose - Widescreen</p>
+                    </div>
+                </div>
+
+                <!-- Cinema Wide Layout Card -->
+                <div class="layout-card" data-layout="cinema">
+                    <div class="layout-card-preview">
+                        <div class="mini-strip-preview layout-cinema">
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="layout-card-info">
+                        <h3>Cinema Wide</h3>
+                        <p>1 Pose - Widescreen Film</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Start Action Button -->
+            <div class="step-actions centered">
+                <button id="start-shoot-btn" class="btn-primary btn-large btn-glow">
+                    <i data-lucide="video"></i> Masuk ke Camera Booth
+                </button>
+            </div>
+        </section>
+
+        <!-- STEP 2: CAMERA BOOTH -->
+        <section id="step-2" class="step-view">
+            <div class="booth-header">
+                <button id="back-to-layout-btn" class="btn-secondary btn-back">
+                    <i data-lucide="chevron-left"></i> Kembali ke Layout
+                </button>
+                <div class="selected-layout-badge">
+                    Selected layout: <span id="active-layout-display-text">Layout A (4 photos)</span>
+                </div>
+            </div>
+
+            <div class="camera-card">
+                <div class="camera-wrapper">
+                    <video id="webcam" autoplay playsinline muted></video>
+                    <canvas id="filter-canvas"></canvas>
+                    
+                    <!-- Visual Grid Helper Guidelines -->
+                    <div id="grid-helper" class="grid-helper hidden">
+                        <div class="grid-line line-v"></div>
+                        <div class="grid-line line-h"></div>
+                    </div>
+
+                    <!-- Flash overlay -->
+                    <div id="flash-overlay" class="flash-overlay"></div>
+                    
+                    <!-- Countdown Display -->
+                    <div id="countdown-overlay" class="countdown-overlay hidden">
+                        <span id="countdown-number">3</span>
+                    </div>
+
+                    <!-- Camera Connection State Placeholder -->
+                    <div id="camera-placeholder" class="camera-placeholder">
+                        <i data-lucide="camera" class="placeholder-icon"></i>
+                        <h3>Akses Kamera Diperlukan</h3>
+                        <p>Izinkan akses kamera di browser Anda untuk mulai berfoto.</p>
+                        <button id="start-camera-btn" class="btn-primary">
+                            <i data-lucide="video"></i> Hubungkan Kamera
+                        </button>
+                    </div>
+
+                    <!-- Photo Progress Badge -->
+                    <div id="capture-indicator" class="capture-indicator hidden">
+                        <span class="indicator-dot"></span>
+                        <span id="indicator-text">Mengambil Foto 1/4</span>
+                    </div>
+                </div>
+
+                <!-- Camera Control Parameters -->
+                <div class="camera-params-bar">
+                    <div class="param-group">
+                        <label for="countdown-duration">Select Countdown Time:</label>
+                        <select id="countdown-duration" class="styled-select">
+                            <option value="3" selected>3s</option>
+                            <option value="5">5s</option>
+                            <option value="10">10s</option>
+                        </select>
+                    </div>
+                    <div class="param-group" id="camera-select-group" style="margin-left: 1rem;">
+                        <label for="camera-select">Pilih Kamera:</label>
+                        <select id="camera-select" class="styled-select">
+                            <option value="">Mendeteksi Kamera...</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Main Shutter Capture Button -->
+                <div class="controls-container centered-btn">
+                    <button id="capture-btn" class="btn-primary start-capture-btn" disabled>
+                        <i data-lucide="camera"></i> Start Capture (<span id="photo-count-badge">4</span> photos)
+                    </button>
+                </div>
+
+                <!-- Filter Selection scroll -->
+                <div class="filters-container">
+                    <label class="section-label">Choose a filter for your photos!</label>
+                    <div class="filters-scroll">
+                        <button class="filter-btn active" data-filter="normal">
+                            <div class="filter-preview normal"></div>
+                            <span>No Filter</span>
+                        </button>
+                        <button class="filter-btn" data-filter="mono">
+                            <div class="filter-preview mono"></div>
+                            <span>B&W</span>
+                        </button>
+                        <button class="filter-btn" data-filter="traditional">
+                            <div class="filter-preview traditional"></div>
+                            <span>Traditional</span>
+                        </button>
+                        <button class="filter-btn" data-filter="sepia">
+                            <div class="filter-preview sepia"></div>
+                            <span>Sepia</span>
+                        </button>
+                        <button class="filter-btn" data-filter="vintage">
+                            <div class="filter-preview vintage"></div>
+                            <span>Vintage</span>
+                        </button>
+                        <button class="filter-btn" data-filter="soft">
+                            <div class="filter-preview soft"></div>
+                            <span>Soft</span>
+                        </button>
+                        <button class="filter-btn" data-filter="noir">
+                            <div class="filter-preview noir"></div>
+                            <span>Noir</span>
+                        </button>
+                        <button class="filter-btn" data-filter="vivid">
+                            <div class="filter-preview vivid"></div>
+                            <span>Vivid</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STEP 3: STUDIO CUSTOMIZER & EDITOR -->
+        <section id="step-3" class="step-view">
+            <div class="editor-layout">
+                
+                <!-- Left Pane: Collage Canvas and Sticker overlays -->
+                <div class="editor-left-pane">
+                    <div class="preview-editor-wrapper">
+                        <div class="compiled-preview-container" id="preview-container">
+                            <img id="compiled-preview-img" src="" alt="Photobooth collage result">
+                            <!-- Draggable stickers append here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Pane: Customizer controls panel -->
+                <div class="editor-right-pane">
+                    <div class="customizer-card">
+                        <h2 class="panel-title"><i data-lucide="sliders"></i> Studio Design Settings</h2>
+                        
+                        <!-- Frame Color Presets -->
+                        <div class="customizer-group">
+                            <label class="group-label">Frame Colour</label>
+                            <div class="color-presets-grid">
+                                <button class="frame-preset-btn active" data-frame="white" style="--bg-preset: #ffffff;"></button>
+                                <button class="frame-preset-btn" data-frame="black" style="--bg-preset: #121212;"></button>
+                                <button class="frame-preset-btn" data-frame="pink" style="--bg-preset: #ffd3e8;"></button>
+                                <button class="frame-preset-btn" data-frame="green" style="--bg-preset: #dcfce7;"></button>
+                                <button class="frame-preset-btn" data-frame="blue" style="--bg-preset: #d3e5ff;"></button>
+                                <button class="frame-preset-btn" data-frame="yellow" style="--bg-preset: #fef08a;"></button>
+                                <button class="frame-preset-btn" data-frame="purple" style="--bg-preset: #f3e8ff;"></button>
+                                <button class="frame-preset-btn" data-frame="maroon" style="--bg-preset: #991b1b;"></button>
+                                <button class="frame-preset-btn" data-frame="burgundy" style="--bg-preset: #800020;"></button>
+                                
+                                <!-- Custom color picker button -->
+                                <div class="color-picker-wrapper">
+                                    <input type="color" id="custom-frame-color" value="#ffffff" title="Pilih warna custom">
+                                    <span id="color-hex-label">#FFFFFF</span>
+                            </div>
+                        </div>
+
+                        <!-- Frame Pattern Presets -->
+                        <div class="customizer-group">
+                            <label class="group-label">Frame Pattern (Motif)</label>
+                            <div class="pattern-presets-grid">
+                                <button class="pattern-preset-btn active" data-pattern="none">Polos</button>
+                                <button class="pattern-preset-btn" data-pattern="rainbow" style="background: linear-gradient(135deg, #ffadad, #ffeaa7, #9bf6ff, #ffc6ff); color: #000;" title="Pelangi"></button>
+                                <button class="pattern-preset-btn" data-pattern="dots" style="background-color: #ffd3e8; background-image: radial-gradient(#fff 15%, transparent 16%); background-size: 8px 8px;" title="Polkadot"></button>
+                                <button class="pattern-preset-btn" data-pattern="stripes" style="background: repeating-linear-gradient(45deg, #f3e8ff, #f3e8ff 4px, #ffffff 4px, #ffffff 8px);" title="Garis-Garis"></button>
+                                <button class="pattern-preset-btn" data-pattern="sunset" style="background: linear-gradient(to bottom, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);" title="Sunset"></button>
+                                <button class="pattern-preset-btn" data-pattern="stars" style="background-color: #0f172a; background-image: radial-gradient(#fef08a 10%, transparent 11%); background-size: 10px 10px;" title="Bintang"></button>
+                            </div>
+                        </div>
+
+                    <div class="customizer-panel-section">
+                        <!-- Custom PNG Frame Upload -->
+                        <div class="customizer-group hidden">
+                            <label class="group-label">Custom PNG Overlay</label>
+                            <div class="file-upload-wrapper">
+                                <button type="button" class="file-upload-btn" id="upload-trigger-btn">
+                                    <i data-lucide="upload-cloud"></i> Upload Frame PNG
+                                </button>
+                                <input type="file" id="custom-frame-upload" accept="image/png">
+                            </div>
+                            <div class="upload-status-row hidden" id="upload-status">
+                                <span class="filename" id="upload-filename">design.png</span>
+                                <button class="btn-clear-upload" id="clear-upload-btn" title="Hapus Design">
+                                    <i data-lucide="x"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Border Parameters Adjustment -->
+                        <div class="customizer-group hidden">
+                            <label class="group-label">Ketebalan Border & Sudut</label>
+                            <div class="range-row">
+                                <div class="range-info">
+                                    <span>Ketebalan Frame</span>
+                                    <span class="range-badge" id="border-val">M</span>
+                                </div>
+                                <input type="range" id="border-thickness" min="15" max="40" value="26" class="styled-range">
+                            </div>
+                            <div class="range-row">
+                                <div class="range-info">
+                                    <span>Kelengkungan Sudut</span>
+                                    <span class="range-badge" id="radius-val">Sedang</span>
+                                </div>
+                                <input type="range" id="corner-radius" min="0" max="20" value="8" class="styled-range">
+                            </div>
+                        </div>
+
+                        <!-- Text Banner Stamp -->
+                        <div class="customizer-group hidden">
+                            <label class="group-label">Tulisan Frame (Stamp)</label>
+                            <div class="input-with-icon">
+                                <i data-lucide="type" class="input-icon"></i>
+                                <input type="text" id="stamp-text" value="AURA BOOTH" placeholder="KODAK FILM / AURA BOOTH" maxlength="24">
+                            </div>
+                            <div class="checkbox-row-container">
+                                <label class="checkbox-row">
+                                    <input type="checkbox" id="show-date" checked>
+                                    <span>Tampilkan Tanggal Cetak</span>
+                                </label>
+                                <label class="checkbox-row">
+                                    <input type="checkbox" id="apply-grain">
+                                    <span>Noise Film Grain</span>
+                                </label>
+                            </div>
+                        </div></div>
+
+                        <!-- Interactive Sticker Lab Selector -->
+                        <div class="customizer-group">
+                            <label class="group-label">Stickers Theme Presets (Instan)</label>
+                            <div class="sticker-themes-grid">
+                                <button class="sticker-theme-btn active" data-theme="none">No Stickers</button>
+                                <button class="sticker-theme-btn" data-theme="doraemon">Doraemon</button>
+                                <button class="sticker-theme-btn" data-theme="masha">Masha & Bear</button>
+                                <button class="sticker-theme-btn" data-theme="arcade">Retro Arcade</button>
+                                <button class="sticker-theme-btn" data-theme="cosmic">Cosmic Aura</button>
+                                <button class="sticker-theme-btn" data-theme="girlypop">Girlypop</button>
+                                <button class="sticker-theme-btn" data-theme="sanrio">Kuromi & Melody</button>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Action Panel -->
+            <div class="editor-actions-footer">
+                <button id="download-btn" class="btn-primary btn-large">
+                    <i data-lucide="download"></i> Download Photo Strip
+                </button>
+                <button id="download-gif-btn" class="btn-secondary btn-large">
+                    <i data-lucide="clapperboard"></i> Download GIF
+                </button>
+                <button id="retake-btn" class="btn-secondary btn-large">
+                    <i data-lucide="rotate-ccw"></i> Take New Photos
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Lightbox Viewing Modal (for saved gallery items) -->
+    <div id="view-modal" class="modal-overlay hidden">
+        <div class="modal-content glass-panel">
+            <button id="close-view-btn" class="modal-close" title="Tutup">
+                <i data-lucide="x"></i>
+            </button>
+            <h2 class="modal-title">Simpan & Bagikan Hasil Foto ✨</h2>
+            <div class="view-modal-body">
+                <img id="view-modal-img" src="" alt="Full-size view of photobooth strip">
+                <div class="modal-actions">
+                    <button id="view-download-btn" class="btn-primary btn-large">
+                        <i data-lucide="download"></i> Download PNG
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Welcome Immersive Screen -->
+    <div id="welcome-modal" class="welcome-screen-overlay">
+        <!-- Floating Ambient Background Shapes -->
+        <div class="welcome-blob blob-1"></div>
+        <div class="welcome-blob blob-2"></div>
+        <div class="welcome-blob blob-3"></div>
+
+        <div class="welcome-screen-container">
+            <!-- Left Side: Interactive Branding & Onboarding Info -->
+            <div class="welcome-brand-side">
+                <h1 class="welcome-main-title">
+                    Capture Your Best Vibe di <span class="logo-accent-gradient">AURA</span>BOOTH
+                </h1>
+                
+                <p class="welcome-desc">
+                    Self-photo studio digital ter-aesthetic yang siap bikin foto strip kamu auto-kece! Pilih layout favoritmu, poles pakai filter hits, hias dengan stiker karakter super gemas, dan langsung download hasilnya.
+                </p>
+                
+                <div class="welcome-feature-cards">
+                    <div class="welcome-feat-card">
+                        <div class="feat-icon cyan">
+                            <i data-lucide="layout"></i>
+                        </div>
+                        <h4>Layout Trendi</h4>
+                        <p>Dari strip vertikal klasik sampai rasio widescreen ala bioskop sinematik.</p>
+                    </div>
+                    
+                    <div class="welcome-feat-card">
+                        <div class="feat-icon pink">
+                            <i data-lucide="aperture"></i>
+                        </div>
+                        <h4>Filter Hits</h4>
+                        <p>Poles fotomu dengan warna vintage retro dan filter soft biar mukamu auto-glowing!</p>
+                    </div>
+                    
+                    <div class="welcome-feat-card">
+                        <div class="feat-icon blue">
+                            <i data-lucide="smile"></i>
+                        </div>
+                        <h4>Stiker Gemas</h4>
+                        <p>Tempel stiker karakter favoritmu (Doraemon, Kuromi, Melody) biar makin lucu.</p>
+                    </div>
+                </div>
+                
+                <button id="close-welcome-btn" class="btn-primary btn-large btn-glow start-studio-btn">
+                    Mulai Pose Sekarang! <i data-lucide="camera" class="btn-camera-icon"></i>
+                </button>
+            </div>
+            
+            <!-- Right Side: Live Visual Collage Showcase -->
+            <div class="welcome-showcase-side">
+                <div class="showcase-frame-stack">
+                    <!-- Showcase Strip 1: Doraemon Theme -->
+                    <div class="showcase-strip strip-left">
+                        <div class="strip-header-accent doraemon"></div>
+                        <div class="showcase-photo-box"><img class="showcase-avatar" src="assets/portrait_boy.png" alt="Boy portrait"></div>
+                        <div class="showcase-photo-box"><img class="showcase-avatar" src="assets/portrait_boy.png" alt="Boy portrait" style="filter: grayscale(1);"></div>
+                        <div class="showcase-photo-box"><img class="showcase-avatar" src="assets/portrait_boy.png" alt="Boy portrait" style="filter: sepia(0.5);"></div>
+                        <div class="showcase-footer">AURA BOOTH</div>
+                    </div>
+                    
+                    <!-- Showcase Strip 2: Sanrio Theme -->
+                    <div class="showcase-strip strip-center">
+                        <div class="strip-header-accent sanrio"></div>
+                        <div class="showcase-photo-box"><img class="showcase-avatar" src="assets/portrait_girl.png" alt="Girl portrait"></div>
+                        <div class="showcase-photo-box"><img class="showcase-avatar" src="assets/portrait_girl.png" alt="Girl portrait" style="filter: saturate(1.5);"></div>
+                        <div class="showcase-photo-box"><img class="showcase-avatar" src="assets/portrait_girl.png" alt="Girl portrait" style="filter: contrast(1.25);"></div>
+                        <div class="showcase-footer">AURA BOOTH</div>
+                    </div>
+                    
+                    <!-- Showcase Strip 3: Classic/Retro Theme -->
+                    <div class="showcase-strip strip-right">
+                        <div class="strip-header-accent classic"></div>
+                        <div class="showcase-photo-box"><img class="showcase-avatar" src="assets/portrait_friends.png" alt="Friends portrait" style="filter: grayscale(1);"></div>
+                        <div class="showcase-photo-box"><img class="showcase-avatar" src="assets/portrait_friends.png" alt="Friends portrait"></div>
+                        <div class="showcase-photo-box"><img class="showcase-avatar" src="assets/portrait_friends.png" alt="Friends portrait" style="filter: sepia(0.35);"></div>
+                        <div class="showcase-footer">AURA BOOTH</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Entry Point -->
+    <script src="app.js?v=24"></script>
+    <script>
+        // Init Lucide icon elements
+        lucide.createIcons();
+    </script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+# Gemini configurations
+.gemini/
+.agents/
+.system_generated/
+
+# Python Cache
+__pycache__/
+*.pyc
+
+# OS files
+Thumbs.db
