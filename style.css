@@ -538,6 +538,7 @@ body {
     gap: 0.5rem;
     font-size: 0.82rem;
     font-weight: 600;
+    color: #ffffff;
     z-index: 3;
     backdrop-filter: blur(6px);
     box-shadow: 0 4px 15px rgba(0,0,0,0.35);
