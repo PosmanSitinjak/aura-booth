@@ -120,22 +120,27 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-.welcome-footer-credit {
-    font-size: 0.8rem;
-    font-weight: 500;
-    color: rgba(9, 13, 22, 0.45);
-    margin-top: 1.25rem;
-    width: 100%;
+.app-footer {
+    padding: 1.5rem 2rem;
     text-align: center;
+    background: rgba(255, 255, 255, 0.7);
+    border-top: 1px solid var(--border-color);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    backdrop-filter: blur(10px);
+    margin-top: auto;
+    position: relative;
+    z-index: 5;
 }
-.welcome-footer-credit a {
+.app-footer a {
     color: var(--accent);
     text-decoration: none;
     font-weight: 700;
     transition: var(--transition-smooth);
     border-bottom: 1px dashed rgba(37, 99, 235, 0.3);
 }
-.welcome-footer-credit a:hover {
+.app-footer a:hover {
     color: var(--accent-pink);
     border-bottom-color: var(--accent-pink);
 }
