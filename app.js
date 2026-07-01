@@ -1762,6 +1762,9 @@ document.addEventListener('DOMContentLoaded', () => {
             lucide.createIcons();
             
             if (!obj.error) {
+                // Set the main preview image source to the compiled GIF to play it natively
+                compiledPreviewImg.src = obj.image;
+                
                 const link = document.createElement('a');
                 link.download = `aurabooth_animation_${Date.now()}.gif`;
                 link.href = obj.image; // actual animated gif base64
