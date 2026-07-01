@@ -120,36 +120,22 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-.creator-credit {
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--text-secondary);
-}
-.creator-credit a {
-    color: var(--accent);
-    text-decoration: none;
-    font-weight: 700;
-    transition: var(--transition-smooth);
-}
-.creator-credit a:hover {
-    color: var(--accent-pink);
-    text-shadow: 0 0 8px var(--accent-pink-glow);
-}
-.welcome-creator-signature {
-    font-size: 0.82rem;
+.welcome-footer-credit {
+    font-size: 0.8rem;
     font-weight: 500;
-    color: rgba(9, 13, 22, 0.6);
-    margin-top: 0.5rem;
-    margin-bottom: 1.5rem;
+    color: rgba(9, 13, 22, 0.45);
+    margin-top: 1.25rem;
+    width: 100%;
+    text-align: center;
 }
-.welcome-creator-signature a {
+.welcome-footer-credit a {
     color: var(--accent);
     text-decoration: none;
     font-weight: 700;
-    border-bottom: 1px dashed rgba(37, 99, 235, 0.4);
     transition: var(--transition-smooth);
+    border-bottom: 1px dashed rgba(37, 99, 235, 0.3);
 }
-.welcome-creator-signature a:hover {
+.welcome-footer-credit a:hover {
     color: var(--accent-pink);
     border-bottom-color: var(--accent-pink);
 }
