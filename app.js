@@ -285,8 +285,8 @@ document.addEventListener('DOMContentLoaded', () => {
         gridHelper.classList.remove('hidden');
         captureBtn.removeAttribute('disabled');
         
-        canvas.width = video.videoWidth || 640;
-        canvas.height = video.videoHeight || 480;
+        canvas.width = 640;
+        canvas.height = 480;
         
         loadCameraDevices();
         renderLoop();
@@ -439,7 +439,23 @@ document.addEventListener('DOMContentLoaded', () => {
         
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.filter = getCanvasFilterString(activeFilter);
-        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        
+        // Aspect ratio cover cropping logic to prevent squishing (especially on mobile portrait cameras)
+        const imgWidth = video.videoWidth || 640;
+        const imgHeight = video.videoHeight || 480;
+        const srcAspect = imgWidth / imgHeight;
+        const destAspect = canvas.width / canvas.height;
+        
+        let sx = 0, sy = 0, sw = imgWidth, sh = imgHeight;
+        if (srcAspect > destAspect) {
+            sw = imgHeight * destAspect;
+            sx = (imgWidth - sw) / 2;
+        } else {
+            sh = imgWidth / destAspect;
+            sy = (imgHeight - sh) / 2;
+        }
+        
+        ctx.drawImage(video, sx, sy, sw, sh, 0, 0, canvas.width, canvas.height);
         
         requestAnimationFrame(renderLoop);
     }
