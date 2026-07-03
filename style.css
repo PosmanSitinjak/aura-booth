@@ -1112,22 +1112,6 @@ input[type="range"]::-webkit-slider-thumb:hover {
         width: 100%;
         box-sizing: border-box;
     }
-    .welcome-main-title {
-        font-size: 1.85rem;
-    }
-    .welcome-feature-cards {
-        grid-template-columns: 1fr;
-        gap: 0.85rem;
-    }
-    .welcome-feat-card {
-        padding: 1rem;
-    }
-    .welcome-feat-card p {
-        font-size: 0.82rem;
-    }
-    .welcome-badge {
-        margin-bottom: 1rem;
-    }
 }
 
 /* --- MAIN GALLERY LIST (Under Step 1) --- */
@@ -1607,6 +1591,10 @@ input[type="range"]::-webkit-slider-thumb:hover {
     padding: 1.25rem;
     box-shadow: 0 4px 20px rgba(37, 99, 235, 0.02);
     transition: var(--transition-smooth);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
 }
 .welcome-feat-card:hover {
     transform: translateY(-5px);
@@ -1830,5 +1818,24 @@ input[type="range"]::-webkit-slider-thumb:hover {
 @keyframes loaderRotate {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 600px) {
+    .welcome-main-title {
+        font-size: 1.85rem;
+    }
+    .welcome-feature-cards {
+        grid-template-columns: 1fr;
+        gap: 0.85rem;
+    }
+    .welcome-feat-card {
+        padding: 1rem;
+    }
+    .welcome-feat-card p {
+        font-size: 0.82rem;
+    }
+    .welcome-badge {
+        margin-bottom: 1rem;
+    }
 }
 
