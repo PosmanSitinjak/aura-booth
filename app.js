@@ -559,7 +559,23 @@ document.addEventListener('DOMContentLoaded', () => {
         tempCtx.scale(-1, 1);
         
         tempCtx.filter = getCanvasFilterString(activeFilter);
-        tempCtx.drawImage(video, 0, 0, tempCanvas.width, tempCanvas.height);
+        
+        // Aspect ratio cover cropping logic
+        const imgWidth = video.videoWidth || 640;
+        const imgHeight = video.videoHeight || 480;
+        const srcAspect = imgWidth / imgHeight;
+        const destAspect = tempCanvas.width / tempCanvas.height;
+        
+        let sx = 0, sy = 0, sw = imgWidth, sh = imgHeight;
+        if (srcAspect > destAspect) {
+            sw = imgHeight * destAspect;
+            sx = (imgWidth - sw) / 2;
+        } else {
+            sh = imgWidth / destAspect;
+            sy = (imgHeight - sh) / 2;
+        }
+        
+        tempCtx.drawImage(video, sx, sy, sw, sh, 0, 0, tempCanvas.width, tempCanvas.height);
         
         return tempCanvas;
     }
