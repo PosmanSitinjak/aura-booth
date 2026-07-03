@@ -1474,6 +1474,7 @@ input[type="range"]::-webkit-slider-thumb:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow-x: hidden;
     overflow-y: auto;
     padding: 2rem;
     transition: var(--transition-smooth);
@@ -1790,11 +1791,13 @@ input[type="range"]::-webkit-slider-thumb:hover {
         padding: 2.5rem 1rem;
     }
     .welcome-screen-container {
+        width: 100%;
         grid-template-columns: 1fr;
         gap: 2rem;
         text-align: center;
     }
     .welcome-brand-side {
+        width: 100%;
         align-items: center;
         text-align: center;
     }
